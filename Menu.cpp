@@ -7,6 +7,11 @@ using namespace std;
 Menu::Menu(Input inp_)
 {
 	input = inp_;
+	bf = BruteForce();
+	//tutaj tylko do sprawdzenia
+	matrix = input.fromFile();
+	print();
+	//koniec 
 	options();
 }
 
@@ -18,24 +23,26 @@ Menu::~Menu()
 void Menu::options()
 {
 	cout << endl;
-	cout << "Co chcesz zrobic?\n[0] - wczytaj dane z pliku\n[1] - wyswietl dane\n[2] - przeglad zupelny (brute force)\n[3] - branch and bound\n[9] - wyjdz" << endl;
+	cout << "Co chcesz zrobic?\n[1] - wczytaj dane z pliku\n[2] - wyswietl dane\n[3] - brute force\n[4] - branch and bound\n[9] - wyjdz" << endl;
 	cin >> in;
 	cout << endl;
 
 	switch (in) {
-	case '0':
+	case '1':
 		matrix = input.fromFile();
 		options();
 		break;
-	case '1':
+	case '2':
 		print();
 		options();
 		break;
-	case '2':
-		//brute force
-		break;
 	case '3':
+		bf.run(input.getSize(), matrix);
+		options();
+		break;
+	case '4':
 		//branch and boud
+		options();
 		break;
 	case '9':
 		break;
