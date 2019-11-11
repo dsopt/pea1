@@ -37,11 +37,11 @@ void BranchBound::run(int size_, int ** matrix_)
 				queue.pop_back();
 				visited[path.back()] = true;
 
-				cost += matrix_[path.at(path.size() - 1)][path.at(path.size() - 2)];
+				cost += matrix_[path.at(path.size() - 2)][path.at(path.size() - 1)];
 
 				if (cost >= mincost) {
 					//jesli koszt trasy przewyzsza minimalny cofamy sie do poprzedniego 
-					cost -= matrix_[path.at(path.size() - 1)][path.at(path.size() - 2)];
+					cost -= matrix_[path.at(path.size() - 2)][path.at(path.size() - 1)];
 					visited[path.back()] = false;
 					path.pop_back();
 				}
@@ -66,7 +66,7 @@ void BranchBound::run(int size_, int ** matrix_)
 			else if (!queue.empty() && queue.back().imp < path.size() && path.size() > 1) {
 				//jesli nie ma wiecej wierzcholkow do odwiedzenia musimy sie cofnac
 				
-				cost -= matrix_[path.at(path.size() - 1)][path.at(path.size() - 2)];
+				cost -= matrix_[path.at(path.size() - 2)][path.at(path.size() - 1)];
 				visited[path.back()] = false;
 				path.pop_back();
 			}
@@ -77,7 +77,7 @@ void BranchBound::run(int size_, int ** matrix_)
 		else if(!path.empty()) {
 			//jesli z jakiegos powodu wierzcholek jest zawarty w danym cyklu - cofamy sie
 			visited[path.back()] = false;
-			cost -= matrix_[path.back()][path.at(path.size() - 2)];
+			cost -= matrix_[path.at(path.size() - 2)][path.back()];
 			path.pop_back();
 		}
 	} while (!queue.empty());

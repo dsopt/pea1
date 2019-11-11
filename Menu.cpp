@@ -7,6 +7,9 @@ using namespace std;
 Menu::Menu(Input inp_)
 {
 	input = inp_;
+	//
+	matrix = input.fromFile();
+	//
 	options();
 }
 

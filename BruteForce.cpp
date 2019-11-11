@@ -5,7 +5,7 @@ using namespace std;
 
 BruteForce::BruteForce()
 {
-	cost = 0;
+	cost = 0; 
 	max = 2147483647;
 	mincost = max;
 }
@@ -38,7 +38,7 @@ void BruteForce::run(int size_, int ** matrix_)
 				queue.pop_back();
 				visited[path.back()] = true;
 
-				cost += matrix_[path.at(path.size() - 1)][path.at(path.size() - 2)];
+				cost += matrix_[path.at(path.size() - 2)][path.at(path.size() - 1)];
 
 				for (int j = 0; j < size; j++) {
 					if (visited[j] != true) {
@@ -59,7 +59,7 @@ void BruteForce::run(int size_, int ** matrix_)
 			else if (!queue.empty() && queue.back().imp < path.size() && path.size() > 1) {
 				//jesli nie ma wiecej wierzcholkow do odwiedzenia musimy sie cofnac
 
-				cost -= matrix_[path.at(path.size() - 1)][path.at(path.size() - 2)];
+				cost -= matrix_[path.at(path.size() - 2)][path.at(path.size() - 1)];
 				visited[path.back()] = false;
 				path.pop_back();
 			}
@@ -70,7 +70,7 @@ void BruteForce::run(int size_, int ** matrix_)
 		else if (!path.empty()) {
 			//jesli z jakiegos powodu wierzcholek jest zawarty w danym cyklu - cofamy sie
 			visited[path.back()] = false;
-			cost -= matrix_[path.back()][path.at(path.size() - 2)];
+			cost -= matrix_[path.at(path.size() - 2)][path.back()];
 			path.pop_back();
 		}
 	} while (!queue.empty());
