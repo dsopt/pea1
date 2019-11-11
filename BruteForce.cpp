@@ -6,7 +6,8 @@ using namespace std;
 BruteForce::BruteForce()
 {
 	cost = 0;
-	mincost = 2147483647;
+	max = 2147483647;
+	mincost = max;
 }
 
 
