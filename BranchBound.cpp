@@ -1,20 +1,20 @@
-#include "BruteForce.h"
-#include <iostream>
-
+#include "BranchBound.h"
+#include <iostream> 
 using namespace std;
 
-BruteForce::BruteForce()
+BranchBound::BranchBound()
 {
 	cost = 0;
-	mincost = 2147483647;
+	max = 2147483647;
+	mincost = max;
 }
 
 
-BruteForce::~BruteForce()
+BranchBound::~BranchBound()
 {
 }
 
-void BruteForce::run(int size_, int ** matrix_)
+void BranchBound::run(int size_, int ** matrix_)
 {
 	size = size_;
 	visited = new bool[size];
@@ -39,9 +39,17 @@ void BruteForce::run(int size_, int ** matrix_)
 
 				cost += matrix_[path.at(path.size() - 1)][path.at(path.size() - 2)];
 
-				for (int j = 0; j < size; j++) {
-					if (visited[j] != true) {
-						queue.push_back({ j, int(path.size()) });
+				if (cost >= mincost) {
+					//jesli koszt trasy przewyzsza minimalny cofamy sie do poprzedniego 
+					cost -= matrix_[path.at(path.size() - 1)][path.at(path.size() - 2)];
+					visited[path.back()] = false;
+					path.pop_back();
+				}
+				else {
+					for (int j = 0; j < size; j++) {
+						if (visited[j] != true) {
+							queue.push_back({ j, int(path.size()) }); 
+						}
 					}
 				}
 
@@ -54,10 +62,10 @@ void BruteForce::run(int size_, int ** matrix_)
 					}
 					cost -= matrix_[path.back()][path.at(0)];
 				}
-			}
+			} 
 			else if (!queue.empty() && queue.back().imp < path.size() && path.size() > 1) {
 				//jesli nie ma wiecej wierzcholkow do odwiedzenia musimy sie cofnac
-
+				
 				cost -= matrix_[path.at(path.size() - 1)][path.at(path.size() - 2)];
 				visited[path.back()] = false;
 				path.pop_back();
@@ -66,7 +74,7 @@ void BruteForce::run(int size_, int ** matrix_)
 				queue.pop_back();
 			}
 		}
-		else if (!path.empty()) {
+		else if(!path.empty()) {
 			//jesli z jakiegos powodu wierzcholek jest zawarty w danym cyklu - cofamy sie
 			visited[path.back()] = false;
 			cost -= matrix_[path.back()][path.at(path.size() - 2)];

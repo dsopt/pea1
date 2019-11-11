@@ -1,11 +1,11 @@
 #include <vector>
 #pragma once
-class BruteForce
+class BranchBound
 {
 public:
-	BruteForce();
-	~BruteForce();
-	void run(int size_, int** matrix_);
+	BranchBound();
+	~BranchBound();
+	void run(int size_, int ** matrix_);
 private:
 	struct node {
 		int value, imp;
@@ -14,7 +14,7 @@ private:
 	int mincost;
 	int max;
 	int size;
-	bool* visited;
+	bool *visited;
 	std::vector<int> path;
 	std::vector<int> minpath;
 	std::vector<node> queue;

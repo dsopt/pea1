@@ -7,11 +7,6 @@ using namespace std;
 Menu::Menu(Input inp_)
 {
 	input = inp_;
-	bf = BruteForce();
-	//tutaj tylko do sprawdzenia
-	matrix = input.fromFile();
-	print();
-	//koniec 
 	options();
 }
 
@@ -37,11 +32,13 @@ void Menu::options()
 		options();
 		break;
 	case '3':
+		bf = BruteForce();
 		bf.run(input.getSize(), matrix);
 		options();
 		break;
 	case '4':
-		//branch and boud
+		bb = BranchBound();
+		bb.run(input.getSize(), matrix);
 		options();
 		break;
 	case '9':

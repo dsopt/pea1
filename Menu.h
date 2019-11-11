@@ -1,5 +1,6 @@
 #include "Input.h"
 #include "BruteForce.h"
+#include "BranchBound.h"
 #pragma once
 class Menu
 {
@@ -13,5 +14,6 @@ private:
 	int **matrix;
 	Input input;
 	BruteForce bf;
+	BranchBound bb;
 };
 
