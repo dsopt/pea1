@@ -20,7 +20,7 @@ void BranchBound::run(int size_, int ** matrix_)
 	visited = new bool[size];
 
 	//dodaje wszystkie wierzcholki do kolejki
-	for (int i = 1; i < size; i++) {
+	for (int i = 0; i < size; i++) {
 		queue.push_back({ i, 1 });
 	}
 
